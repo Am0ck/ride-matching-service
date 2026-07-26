@@ -2,9 +2,7 @@
   "info": {
     "_postman_id": "86e74b33-739e-48b9-96ae-ecee5c2e498d",
     "name": "Ride Matching Service Manual Verification",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "53159767",
-    "_collection_link": "https://go.postman.co/collection/53159767-86e74b33-739e-48b9-96ae-ecee5c2e498d?source=collection_link"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -280,11 +278,14 @@
               "        pm.expect(d).to.not.have.property(\"available\");",
               "    });",
               "});",
-              "pm.test(\"Driver 10 is closer than Driver 20 (distance check)\", function () {",
+              "pm.test(\"Equal-distance drivers are ordered by ascending driver ID\", function () {",
               "    const json = pm.response.json();",
-              "    const d10 = json.drivers.find(d => d.driverId === 10);",
-              "    const d20 = json.drivers.find(d => d.driverId === 20);",
-              "    pm.expect(d10.distance).to.eql(d20.distance); // both at distance 1 from origin",
+              "",
+              "    pm.expect(json.drivers.map(driver => driver.driverId))",
+              "        .to.eql([10, 20]);",
+              "",
+              "    pm.expect(json.drivers[0].distance)",
+              "        .to.eql(json.drivers[1].distance);",
               "});"
             ]
           }

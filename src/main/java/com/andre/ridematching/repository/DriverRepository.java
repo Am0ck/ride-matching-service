@@ -3,7 +3,6 @@ package com.andre.ridematching.repository;
 import com.andre.ridematching.domain.Driver;
 import org.springframework.stereotype.Repository;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +24,7 @@ public class DriverRepository {
         return Optional.ofNullable(drivers.get(driverId));
     }
 
-    public List<Driver> findAll() { //Collection
+    public List<Driver> findAll() {
         return List.copyOf(drivers.values());
     }
 
